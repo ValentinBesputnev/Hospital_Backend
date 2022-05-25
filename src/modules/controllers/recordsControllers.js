@@ -49,3 +49,28 @@ module.exports.createRecord = async (req, res) => {
     res.status(404).send("Error, new record not created");
   }
 };
+
+module.exports.updateRecord = async (req, res) => {
+  const { token } = req.headers;
+  const body = req.body;
+  try {
+    const allRec = await jwt.verify(token, secret);
+
+    if (
+      (body._id && allRec && body.hasOwnProperty("namePatient")) ||
+      body.hasOwnProperty("doctor") ||
+      body.hasOwnProperty("date") ||
+      body.hasOwnProperty("complaints")
+    ) {
+      Record.updateOne({ _id: body._id }, body).then((result) => {
+        Record.find({ userId: allRec.id }).then((result) => {
+          res.send({ data: result });
+        });
+      });
+    } else {
+      res.status(404).send("Error edit record");
+    }
+  } catch (error) {
+    res.status(404).send("Error edit");
+  }
+};
