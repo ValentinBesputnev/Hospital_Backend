@@ -74,3 +74,22 @@ module.exports.updateRecord = async (req, res) => {
     res.status(404).send("Error edit");
   }
 };
+
+module.exports.deleteRecord = async (req, res) => {
+  const { token } = req.headers;
+  const id = req.query._id;
+  try {
+    const allRec = await jwt.verify(token, secret);
+    if (req.query._id && allRec) {
+      Record.deleteOne({ _id: id }).then((result) => {
+        Record.find({ userId: allRec.id }).then((result) => {
+          res.send({ data: result });
+        });
+      });
+    } else {
+      res.status(404).send("Error");
+    }
+  } catch (error) {
+    res.status(404).send("Error");
+  }
+};
