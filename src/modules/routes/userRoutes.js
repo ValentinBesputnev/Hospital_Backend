@@ -1,23 +1,23 @@
-const router = new Router();
-const Router = require("express");
+const userRoutes = new Router();
 const { check } = require("express-validator");
+const middleware = require("../../middleware/middleware");
 const {
   getAllUsers,
   createNewUser,
   loginUser,
 } = require("../controllers/usersControllers");
 
-router.post(
+userRoutes.post(
   "/createNewUser",
   [
-    check("username", "Имя пользователя не может быть пустым").notEmpty(),
+    check("email", "Имя пользователя не может быть пустым").notEmpty(),
     check("password", "Пароль должен быть больше 4 символом").isLength({
       min: 4,
     }),
   ],
   createNewUser
 );
-router.post("/loginUser", loginUser);
-router.get("/allUsers", getAllUsers);
+userRoutes.post("/loginUser", loginUser);
+userRoutes.get("/allUsers", middleware, getAllUsers);
 
-module.exports = router;
+module.exports = userRoutes;
