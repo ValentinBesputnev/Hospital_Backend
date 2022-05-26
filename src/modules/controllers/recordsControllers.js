@@ -1,5 +1,5 @@
-const Record = require("../../schema/recordsSchema");
 const jwt = require("jsonwebtoken");
+const Record = require("../../schema/recordsSchema");
 const secret = process.env.secret;
 
 module.exports.getAllRecords = async (req, res) => {

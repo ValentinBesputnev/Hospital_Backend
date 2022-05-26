@@ -1,16 +1,16 @@
 const Router = require("express");
-const router = new Router;
+const recordRoutes = new Router();
 
 const {
   getAllRecords,
   createRecord,
   updateRecord,
-  deleteRecord
-} = require('../controllers/recordsControllers');
+  deleteRecord,
+} = require("../controllers/recordsControllers");
 
-router.get('/allRecords', getAllRecords);
-router.post('/createRecord', createRecord);
-router.patch('/updateRecord', updateRecord);
-router.delete("/deleteRecord", deleteRecord);
+recordRoutes.get("/allRecords", getAllRecords);
+recordRoutes.post("/createRecord", createRecord);
+recordRoutes.patch("/updateRecord", updateRecord);
+recordRoutes.delete("/deleteRecord", deleteRecord);
 
-module.exports = router;
+module.exports = recordRoutes;
