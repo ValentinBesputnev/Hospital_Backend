@@ -1,7 +1,7 @@
-const User = require("../../schema/usersSchema");
 const bcrypt = require("bcryptjs");
-const { validationResult } = require("express-validator");
 const jwt = require("jsonwebtoken");
+const User = require("../../schema/usersSchema");
+const { validationResult } = require("express-validator");
 const secret = process.env.secret;
 
 const generateAccecToken = (_id, email) => {
@@ -35,7 +35,7 @@ module.exports.createNewUser = async (req, res) => {
       res.status(400).json({ message: "Registration error" });
     }
   } else {
-    return res.status(400).json({ message: errors });
+    return res.status(400).json({ message: "Error adding user" });
   }
 };
 
@@ -56,14 +56,5 @@ module.exports.loginUser = async (req, res) => {
     return res.json({ token, email });
   } catch (e) {
     res.status(400).json({ message: "Login error" });
-  }
-};
-
-module.exports.getAllUsers = async (req, res) => {
-  try {
-    const users = await User.find();
-    res.json(users);
-  } catch (e) {
-    res.status(400).json({ message: "Something went wrong" });
   }
 };
