@@ -1,5 +1,5 @@
-const Record = require("../../schema/recordsSchema");
 const jwt = require("jsonwebtoken");
+const Record = require("../../schema/recordsSchema");
 const secret = process.env.secret;
 
 module.exports.getAllRecords = async (req, res) => {
@@ -57,7 +57,7 @@ module.exports.updateRecord = async (req, res) => {
     const allRec = await jwt.verify(token, secret);
 
     if (
-      (body._id && allRec && body.hasOwnProperty("namePatient")) ||
+      (body._id && allRec && body.hasOwnProperty("name")) ||
       body.hasOwnProperty("doctor") ||
       body.hasOwnProperty("date") ||
       body.hasOwnProperty("complaints")

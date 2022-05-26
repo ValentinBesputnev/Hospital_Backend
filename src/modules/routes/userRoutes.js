@@ -1,5 +1,4 @@
-const Router = require("express");
-const router = new Router();
+const userRoutes = new Router();
 const { check } = require("express-validator");
 const middleware = require("../../middleware/middleware");
 const {
@@ -8,7 +7,7 @@ const {
   loginUser,
 } = require("../controllers/usersControllers");
 
-router.post(
+userRoutes.post(
   "/createNewUser",
   [
     check("email", "Имя пользователя не может быть пустым").notEmpty(),
@@ -18,7 +17,7 @@ router.post(
   ],
   createNewUser
 );
-router.post("/loginUser", loginUser);
-router.get("/allUsers", middleware, getAllUsers);
+userRoutes.post("/loginUser", loginUser);
+userRoutes.get("/allUsers", middleware, getAllUsers);
 
-module.exports = router;
+module.exports = userRoutes;
