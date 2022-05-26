@@ -1,7 +1,7 @@
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 const User = require("../../schema/usersSchema");
-const { validationResult } = require("express-validator")
+const { validationResult } = require("express-validator");
 const secret = process.env.secret;
 
 const generateAccecToken = (_id, email) => {
