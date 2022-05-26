@@ -1,5 +1,5 @@
-const Router = require("express");
 const router = new Router();
+const Router = require("express");
 const { check } = require("express-validator");
 const {
   getAllUsers,
