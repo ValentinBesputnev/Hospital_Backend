@@ -7,8 +7,7 @@ const apiRoutes = require("./src/modules/routes/userRoutes");
 
 app.use(cors());
 
-const uri = 
-  'mongodb+srv://ValentinBesputnev:123ValentinMongoDB@cluster0.f10fn.mongodb.net/Hospital?retryWrites=true&w=majority';
+const uri = process.env.URI;
 mongoose.connect(uri);
 
 app.use(express.json());
