@@ -3,11 +3,11 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const app = express();
 
-const apiRoutes = require("./src/modules/routes/routes");
+const apiRoutes = require("./src/modules/routes/userRoutes");
 
 app.use(cors());
 
-const uri = '';
+const uri = process.env.URI;
 mongoose.connect(uri);
 
 app.use(express.json());
