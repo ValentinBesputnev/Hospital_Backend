@@ -33,11 +33,13 @@ module.exports.createRecord = async (req, res) => {
     const allRec = await jwt.verify(token, secret);
     if (body && allRec) {
       body.userId = allRec.id;
-      const newReceord = new Record(body);
-      newReceord
+      const newRecord = new Record(body);
+      newRecord
         .save()
         .then((result) => {
-          res.send({ data: result });
+          Record.find({ userId: allRec.id }).then(() =>
+            res.send({ data: result })
+          );
         })
         .catch((e) => {
           res.status(404).send("Error");
@@ -72,5 +74,24 @@ module.exports.updateRecord = async (req, res) => {
     }
   } catch (error) {
     res.status(404).send("Error edit");
+  }
+};
+
+module.exports.deleteRecord = async (req, res) => {
+  const { token } = req.headers;
+  const _id = req.query._id;
+  try {
+    const allRec = await jwt.verify(token, secret);
+    if (req.query._id && allRec) {
+      Record.deleteOne({ _id }).then(() => {
+        Record.find({ userId: allRec.id }).then((result) => {
+          res.send({ data: result });
+        });
+      });
+    } else {
+      res.status(404).send("Error! Params not correct!");
+    }
+  } catch (error) {
+    res.status(404).send("Error deleting record!");
   }
 };
