@@ -1,11 +1,7 @@
+const Router = require("express");
 const userRoutes = new Router();
 const { check } = require("express-validator");
-const middleware = require("../../middleware/middleware");
-const {
-  getAllUsers,
-  createNewUser,
-  loginUser,
-} = require("../controllers/usersControllers");
+const { createNewUser, loginUser } = require("../controllers/usersControllers");
 
 userRoutes.post(
   "/createNewUser",
@@ -18,6 +14,5 @@ userRoutes.post(
   createNewUser
 );
 userRoutes.post("/loginUser", loginUser);
-userRoutes.get("/allUsers", middleware, getAllUsers);
 
 module.exports = userRoutes;
