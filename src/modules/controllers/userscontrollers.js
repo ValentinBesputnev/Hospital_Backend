@@ -35,6 +35,6 @@ module.exports.createNewUser = async (req, res) => {
       res.status(400).json({ message: "Registration error" });
     }
   } else {
-    return res.status(400).json({ message: errors });
+    return res.status(400).json({ message: "Error adding user!" });
   }
 };
